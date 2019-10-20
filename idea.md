@@ -18,6 +18,7 @@
 		+ [jdk](#jdk)
 		- [编译级别](#byj)
 		- [class输出路径](#cla)
+		- [添加jar包](#tjj)
 	- [常用的配置](#cyd1)
 		+ [主题](#zt1)
 		+ [字体](#zt2)
@@ -29,7 +30,7 @@
 		- [修改头文档的注释信息](#xgt)
 		- [项目的文件编码](#xmd)
 		+ [设置自动编译](#szd)
-		+ [如何使用idea中的vim](rhs)
+		+ [如何使用idea中的vim](#rhs)
 		
 + 功能 
 	- [debug](#deb)
@@ -67,7 +68,7 @@
 版本命名 年份.版本号   没有必要安装最新版 
 
 <A NAME="mlw">目录文件的解释</A>  
-  
+
 | 文件名                                   | 作用                                                                                                            |
 |------------------------------------------|-----------------------------------------------------------------------------------------------------------------|
 | bin                                      | 容器,执行文件和启动参数                                                                                         |
@@ -89,7 +90,7 @@
 
 #### idea工程 
  <A name="jgc">java工程</A>  
- 
+
  1. Create new project 正常的创建方法
  2. import project 导入一个现有的工程
  3. open 打开一个以后的工程  
@@ -115,16 +116,16 @@
 
 **如何删除模块** 
 
-	```
+	​```
 	新创建的module右键 -->Open Module Setting-->点击modules 点击那个红色的减号即可但是这个时候module还会在你的硬盘上  它只是在项目里被剔除了   如果想要彻底的删除的话 此时再在module右键 delect
-	```
+	​```
 
-	
+​	
 
 
 
 <A name="web"> web工程 </A> 
-  
+
 web的项目想要创建也很简单的就是 new project 中然后 java--->web Application的  
 ![web工程](https://github.com/shenxixi250/photo/blob/master/idea_photo/9.png) 
 <A name="tom"> tomcat </A> 
@@ -151,15 +152,113 @@ web的项目想要创建也很简单的就是 new project 中然后 java--->web 
 
 <A name="sjk"> 数据库 </A> 
 
-这个是一个大kengkeng等以后用到回来填上
+idea如何导入数据库  
 
+1. 首先新建号项目后    
+2. 右边的侧栏会有database 点击后出现Database的选择框 
+3. 选择框中的+号 >>>点击后会有data source 中选择mysql即可  
+4.   然后就会有如图是界面   可以
+          kengkeng
+    可以看到有Name Host Port端口号    Database来选择数据库   也可以暂时不选择 等创建好了在添加   注意第一次运行下方会有小的感叹号 点击安装驱动即可    然后  点击Test Connection  查看是否成功  
+
+
+如何查看数据库驱动  
+  在左边创建好数据库上面   右键之后找到 properties进入   界面然后在Driver中点击Mysql  进入界面   在如下图所示的地方停留就会看到 驱动的位置了     了解驱动的位置就可以在外部添加jar包了
 <A name="git"> github项目管理 </A> 
 
 同上
 
-  <A name="mav"> maven </A> 
+  <A name="mav"> maven </A>
 
-  同上
+  1. 去官网下载 [文件apach-maven](http://maven.apache.org/download.cgi) 
+
+  2. 使用tar命令解压 在profile文件中配置MAVEN_HOME , 我的MAVEN__HOME路径是/usr/local/maven/apache-maven-3.6.2
+  3. 配置Maven的本地仓库在   /MAVEN-HOME/conf/setting.xml文件中  找配置Maven的本地仓库 在   /MAVEN-HOME/conf/setting.xml文件中  找到
+  <localRepository>/home/shen/Documents/maven_repository</localRepository>
+ 其中maven-repository为本地仓库  
+  4. 配置镜像  找到<mirror>   </mirror>在其中添加内地镜像即可
+
+ ```
+ 
+     | this mirror serves has an ID that matches the mirrorOf element of this mirror. IDs are used
+     | for inheritance and direct lookup purposes, and must be unique across the set of mirrors.
+     |
+  -->
+    <mirror>
+      <id>alimaven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
+    </mirror>
+  
+  </mirrors>
+
+  <!-- profiles
+   | This is a list of profiles which can be activated in a variety of ways, and which can modify
+ ```
+
+ 大概就是上面的这个位置  把源添加进去就可以了  
+
+ ---
+
+### 在idea中配置maven 
+
+	首先进入设置(setting)中 选择架构工具 (stru...) 中的Maven
+
+	![设置maven](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_015.png) 
+    在进入 maven中的 importing 中进行选择
+
+	![maven设置](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_016.png) 
+	更新远程或者本地库 
+
+	![更新库](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_017.png) 
+
+
+
+### 如何搭建一个maven项目
+   创建一个maven项目  首先就是New project>>>> Maven 
+   ![创建maven](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_018.png) 
+   ![创建库名称](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_019.png)
+   ![选择maven配置](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_020.png) 
+   ![项目名和位置](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_021.png) 
+这一步之后一个maven项目的框架就已经出来了 我们接下来还要做一下 文件的添加
+
+
+#####创建必要的文件夹
+
+在main下创建java 和resources文件夹  
+早main同级目录下创建测试目录test 同样创建文件夹 java和resources
+	
+   ![创建目录](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_023.png) 
+ 
+   标记文件目录
+   ![标记文件](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_022.png) 
+
+   添加jar包依赖
+   ![jar包](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_024.png) 
+
+   刷新jar包依赖
+   ![刷新依赖](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E5%B7%A5%E5%85%B7%E6%8F%90%E7%A4%BA_014.png) 
+
+
+   ok一个maven项目完成  可以在test文件夹下创建一个简单的helloworld来运行
+
+   ```
+class HelloWorld 
+{
+public static void main(string[] args)
+	{
+	System.out.println("hello maven");
+	}
+
+}
+   ```
+
+   <++>
+
+	
+
+  
 
  <A name="cjd"> 常见的视图 </A> 
 
@@ -173,8 +272,8 @@ web的项目想要创建也很简单的就是 new project 中然后 java--->web 
 
 
 
- 
-	
+
+​	
 <A name="xmd"> 项目的配置 </A> 
 
 
@@ -196,6 +295,12 @@ file(文件) ---> Project Structure  然后会进入项目的选项框了
 <A name="cla"> class输出路径 </A> 
 
 进入项目配置框后 在Project中 找Project compiler output 然后就可以先选择class的输出路径了
+
+<A NAME="tjj">添加jar包</A>
+
+ 
+
+
 <A NAME="cyd1">idea常用的配置</A> 
 
 在file(文件)--> Settings 进入idea的配置框中
@@ -209,7 +314,7 @@ idea的配置框中 点击 Appearance-->theme 默认就只有两个主题  也�
 idea的配置框中 点击Appearance-->font 可以设置字体的大小和类型
 字体的大小还可以通过在idea的配置框中 Editor-->General  在mouse选项中勾选 Change font size with Ctrl+ Mouse Wheel 也就是按住ctrl 来用鼠标的滑轮进行控制
 
- 
+
 + <A name="zsd"> 注释的字体颜色 </A> 
 
 在idea的配置框中 Editor-->color Scheme-->language Defaults选择即可
@@ -257,7 +362,7 @@ StringBuffer 就可以进行代码提示和补充。
 
 ![头文件注释](https://github.com/shenxixi250/photo/blob/master/idea_photo/10.png) 
 
-	```
+	​```
 
 /**
 
@@ -266,11 +371,11 @@ StringBuffer 就可以进行代码提示和补充。
 
 
 */
-	
+​	
 
 
-	
-	```
+​	
+	​```
 -这个是官网给出的一些 头文件中的预设变量 
 - ${PACKAGE_NAME} - the name of the target package where the new class or interface will be created.
 - ${PROJECT_NAME} - the name of the current project.
@@ -291,7 +396,7 @@ StringBuffer 就可以进行代码提示和补充。
 <A name="xmd"> 项目的文件编码 </A> 
 
  在idea的配置框中 Editor --> Code Style-->File ENcodeing中进行操作
-	
+​	
  说明:Transparent native-to-ascii conversion 主要用于转换 ascii,一般都要勾选,
 不然 Properties 文件中的注释显示的都不会是中文。
 
@@ -308,7 +413,7 @@ JSP 页面和图片等资源作为“原材料”,去“生产”出一个可以
 的 java 类文件进行重新编译,从而对旧文件进
 行了操作。
 
-<A NAME="rhs">vim_idea</A> 
+<A name="rhs"> vim_idea </A> 
 这个先挖一个坑
 
 
