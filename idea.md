@@ -36,6 +36,7 @@
 	- [debug](#deb)
 	- [javadoc](#jav)
 	- [插件 ](#cj1)
+	- [简单使用](#jds) 
 
 
 
@@ -132,13 +133,38 @@ web的项目想要创建也很简单的就是 new project 中然后 java--->web 
 
 ### 安装tomcat
 1. 第一步 去官网下载压缩包  https://tomcat.apache.org/download-80.cgi   注意下载一个tar.gz文件     
+
 2. 第二步  移动到想要安装的位置  我的位置是/usr/local/tomcat
-	+ 先创建文件夹  mkdir /usr/local/tomcat  
-	+ 移动 mv ap。。。tar.gz /usr/local/tomcat 
-	+ 解压 tar -zxvf ap。。。tar.gz  
-	+ 给文件加权限sudo chmod 755 -R ap。。。(R的含义是递归权限）
+  + 先创建文件夹  mkdir /usr/local/tomcat  
+  + 移动 mv ap。。。tar.gz /usr/local/tomcat 
+  + 解压 tar -zxvf ap。。。tar.gz  
+  + 给文件加权限sudo chmod 755 -R ap。。。(R的含义是递归权限）
+
 3. 第三步修改 tomcat的bin目录下的startup.sh 文件  将JAVA_HOME的配置加入到文件中  因为 tomcat是依赖与java的
+
 4. 第四步启动测试  sudo ./startup.sh   显示 Tomcat start表示成功  可以打开浏览器进行验证  localhost:8080
+
+   ```
+   ./startup.sh 
+   Using CATALINA_BASE:   /usr/local/tomcat702 
+   Using CATALINA_HOME:   /usr/local/tomcat702 
+   Using CATALINA_TMPDIR: /usr/local/tomcat702/temp 
+   Using JRE_HOME:        /usr/java/jdk1.6.0_24 
+   Using CLASSPATH:       /usr/local/tomcat702/bin/bootstrap.jar:/usr/local/tomcat702/bin/tomcat-juli.jar 
+   touch: cannot touch `/usr/local/tomcat702/logs/catalina.out': Permission denied 
+    
+
+   二、报错原因：logs目录没有创建修改权限 
+
+    
+
+   三、解决办法： 所有人可操作logs文件
+
+   chmod说明(u:与文件属主拥有一样的权限[a:所有人]；+:增加权限;rwx:可读可写可执行） 
+   -R:递归所有目录和文件 
+   ```
+
+   ​
 
 **参考链接 https://blog.csdn.net/weixx3/article/details/80808484**
 
@@ -174,7 +200,7 @@ idea如何导入数据库
 
   2. 使用tar命令解压 在profile文件中配置MAVEN_HOME , 我的MAVEN__HOME路径是/usr/local/maven/apache-maven-3.6.2
   3. 配置Maven的本地仓库在   /MAVEN-HOME/conf/setting.xml文件中  找配置Maven的本地仓库 在   /MAVEN-HOME/conf/setting.xml文件中  找到
-  <localRepository>/home/shen/Documents/maven_repository</localRepository>
+    <localRepository>/home/shen/Documents/maven_repository</localRepository>
  其中maven-repository为本地仓库  
   4. 配置镜像  找到<mirror>   </mirror>在其中添加内地镜像即可
 
@@ -199,18 +225,18 @@ idea如何导入数据库
 
  大概就是上面的这个位置  把源添加进去就可以了  
 
- ---
+---
 
 ### 在idea中配置maven 
 
 	首先进入设置(setting)中 选择架构工具 (stru...) 中的Maven
 
 	![设置maven](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_015.png) 
-    在进入 maven中的 importing 中进行选择
-
+	在进入 maven中的 importing 中进行选择
+	
 	![maven设置](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_016.png) 
 	更新远程或者本地库 
-
+	
 	![更新库](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_017.png) 
 
 
@@ -228,12 +254,14 @@ idea如何导入数据库
 
 在main下创建java 和resources文件夹  
 早main同级目录下创建测试目录test 同样创建文件夹 java和resources
-	
+​	
    ![创建目录](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_023.png) 
- 
+
    标记文件目录
    ![标记文件](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_022.png) 
 
+
+   [maven官网](http://maven.apache.org/download.cgi) 
    添加jar包依赖
    ![jar包](https://github.com/shenxixi250/photo/blob/master/idea_photo/idea_maven/%E9%80%89%E5%8C%BA_024.png) 
 
@@ -256,9 +284,10 @@ public static void main(string[] args)
 
    <++>
 
-	
+一些小问题  解决创建 web是juint会变红出错   
+原因可能是 你的本地文件库中没有那个版本的juint 所以解决方法就是在 本地仓库目录下  遭到junit的文件夹下面找到对应的版本  在把版本号改一下就可以了 
 
-  
+
 
  <A name="cjd"> 常见的视图 </A> 
 
@@ -424,4 +453,8 @@ JSP 页面和图片等资源作为“原材料”,去“生产”出一个可以
 
 <A name="jav"> javadoc </A> 
 <A name="cj1"> 插件 </A> 
+<A NAME="jds">使用及常见问题解决方案</A> 
 
+1.  恢复Ctrl+z掉的内容 按快捷键为：Ctrl + Shift + Z 
+
+ 
